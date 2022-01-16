@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31829.152
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "interface", "interface.csproj", "{9CD3063E-D16A-4409-8EB5-0296E922D387}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bussiness", "App\Bussiness\Bussiness.csproj", "{22491B1A-E22E-48ED-A85D-0916FBD952D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "App\Database\Database.csproj", "{35AF4ECE-B0B1-483F-B0C2-38FC6679D8D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9CD3063E-D16A-4409-8EB5-0296E922D387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CD3063E-D16A-4409-8EB5-0296E922D387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CD3063E-D16A-4409-8EB5-0296E922D387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CD3063E-D16A-4409-8EB5-0296E922D387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22491B1A-E22E-48ED-A85D-0916FBD952D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22491B1A-E22E-48ED-A85D-0916FBD952D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22491B1A-E22E-48ED-A85D-0916FBD952D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22491B1A-E22E-48ED-A85D-0916FBD952D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35AF4ECE-B0B1-483F-B0C2-38FC6679D8D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35AF4ECE-B0B1-483F-B0C2-38FC6679D8D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35AF4ECE-B0B1-483F-B0C2-38FC6679D8D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35AF4ECE-B0B1-483F-B0C2-38FC6679D8D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15EE08A1-DA6A-40D4-8446-425E6124E559}
+	EndGlobalSection
+EndGlobal
