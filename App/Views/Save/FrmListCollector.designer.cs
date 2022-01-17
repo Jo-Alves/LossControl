@@ -31,21 +31,21 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOptionsSave));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvDatalostProductCollections = new System.Windows.Forms.DataGridView();
-            this.edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.product = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wheigth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.removalDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddListLossProductCollector = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtSearchProduct = new System.Windows.Forms.TextBox();
             this.cbShowItem = new System.Windows.Forms.CheckBox();
             this.btnListtems = new System.Windows.Forms.Button();
+            this.edit = new System.Windows.Forms.DataGridViewImageColumn();
+            this.delete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.product = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wheigth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.removalDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatalostProductCollections)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -98,59 +98,6 @@
             this.dgvDatalostProductCollections.Size = new System.Drawing.Size(761, 351);
             this.dgvDatalostProductCollections.TabIndex = 8;
             this.dgvDatalostProductCollections.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatalostProductCollections_CellClick);
-            // 
-            // edit
-            // 
-            this.edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.edit.HeaderText = "Editar";
-            this.edit.Name = "edit";
-            this.edit.ReadOnly = true;
-            this.edit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.edit.Width = 61;
-            // 
-            // delete
-            // 
-            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.delete.HeaderText = "Excluir";
-            this.delete.Name = "delete";
-            this.delete.ReadOnly = true;
-            this.delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.delete.Width = 66;
-            // 
-            // id
-            // 
-            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            this.id.Width = 49;
-            // 
-            // product
-            // 
-            this.product.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Format = "N3";
-            dataGridViewCellStyle2.NullValue = null;
-            this.product.DefaultCellStyle = dataGridViewCellStyle2;
-            this.product.HeaderText = "Produto";
-            this.product.Name = "product";
-            this.product.ReadOnly = true;
-            // 
-            // wheigth
-            // 
-            this.wheigth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.wheigth.HeaderText = "Peso";
-            this.wheigth.Name = "wheigth";
-            this.wheigth.ReadOnly = true;
-            this.wheigth.Width = 72;
-            // 
-            // removalDate
-            // 
-            this.removalDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.removalDate.HeaderText = "Data da remoção";
-            this.removalDate.Name = "removalDate";
-            this.removalDate.ReadOnly = true;
-            this.removalDate.Width = 166;
             // 
             // btnAddListLossProductCollector
             // 
@@ -212,6 +159,9 @@
             // 
             this.cbShowItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbShowItem.AutoSize = true;
+            this.cbShowItem.Checked = true;
+            this.cbShowItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbShowItem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cbShowItem.ForeColor = System.Drawing.Color.Black;
             this.cbShowItem.Location = new System.Drawing.Point(570, 138);
             this.cbShowItem.Name = "cbShowItem";
@@ -238,6 +188,59 @@
             this.btnListtems.Text = "Listar Itens";
             this.btnListtems.UseVisualStyleBackColor = false;
             this.btnListtems.Click += new System.EventHandler(this.btnListtems_Click);
+            // 
+            // edit
+            // 
+            this.edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.edit.HeaderText = "Editar";
+            this.edit.Name = "edit";
+            this.edit.ReadOnly = true;
+            this.edit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.edit.Width = 61;
+            // 
+            // delete
+            // 
+            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.delete.HeaderText = "Excluir";
+            this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
+            this.delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.delete.Width = 66;
+            // 
+            // id
+            // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            this.id.Width = 49;
+            // 
+            // product
+            // 
+            this.product.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Format = "N3";
+            dataGridViewCellStyle2.NullValue = null;
+            this.product.DefaultCellStyle = dataGridViewCellStyle2;
+            this.product.HeaderText = "Produto";
+            this.product.Name = "product";
+            this.product.ReadOnly = true;
+            // 
+            // wheigth
+            // 
+            this.wheigth.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.wheigth.HeaderText = "Peso";
+            this.wheigth.Name = "wheigth";
+            this.wheigth.ReadOnly = true;
+            this.wheigth.Width = 72;
+            // 
+            // removalDate
+            // 
+            this.removalDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.removalDate.HeaderText = "Data da remoção";
+            this.removalDate.Name = "removalDate";
+            this.removalDate.ReadOnly = true;
+            this.removalDate.Width = 166;
             // 
             // FrmOptionsSave
             // 
@@ -273,12 +276,12 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox txtSearchProduct;
         private System.Windows.Forms.CheckBox cbShowItem;
+        private System.Windows.Forms.Button btnListtems;
         private System.Windows.Forms.DataGridViewImageColumn edit;
         private System.Windows.Forms.DataGridViewImageColumn delete;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn product;
         private System.Windows.Forms.DataGridViewTextBoxColumn wheigth;
         private System.Windows.Forms.DataGridViewTextBoxColumn removalDate;
-        private System.Windows.Forms.Button btnListtems;
     }
 }

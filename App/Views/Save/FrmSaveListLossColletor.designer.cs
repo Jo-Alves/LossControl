@@ -128,6 +128,7 @@
             this.txtWeigth.Size = new System.Drawing.Size(137, 33);
             this.txtWeigth.TabIndex = 58;
             this.txtWeigth.WordWrap = false;
+            this.txtWeigth.TextChanged += new System.EventHandler(this.txtWeigth_TextChanged);
             this.txtWeigth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtWeigth_KeyPress);
             this.txtWeigth.Leave += new System.EventHandler(this.txtweigth_Leave);
             // 
@@ -136,9 +137,10 @@
             this.cbxProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxProduct.FormattingEnabled = true;
             this.cbxProduct.Location = new System.Drawing.Point(31, 64);
-            this.cbxProduct.Name = "txtProduct";
+            this.cbxProduct.Name = "cbxProduct";
             this.cbxProduct.Size = new System.Drawing.Size(413, 30);
-            this.cbxProduct.TabIndex = 59;           
+            this.cbxProduct.TabIndex = 59;
+            this.cbxProduct.SelectedIndexChanged += new System.EventHandler(this.cbxProduct_SelectedIndexChanged);
             // 
             // FrmSaveListLossColletor
             // 
@@ -161,7 +163,7 @@
             this.Name = "FrmSaveListLossColletor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmResponsiblesStudent";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmResponsiblesStudent_KeyDown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmSaveListLossCollector_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FrmResponsiblesStudent_MouseDown);
             this.ResumeLayout(false);
             this.PerformLayout();

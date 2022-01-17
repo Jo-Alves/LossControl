@@ -14,11 +14,11 @@ namespace LossControl
             InitializeComponent();
         }
 
+        DataTable listLostProductCollection = null;
+
         private void LoadListLossProductCollections()
         {
-            dgvDatalostProductCollections.Rows.Clear();
-
-            DataTable listLostProductCollection = null;
+            dgvDatalostProductCollections.Rows.Clear();           
 
             if (cbShowItem.Checked)
             {
@@ -48,57 +48,7 @@ namespace LossControl
             }
         }
 
-        private void btnSaveStudent_Click(object sender, EventArgs e)
-        {
-
-            //try
-            //{
-            //    if (new Student().SearchAll().Rows.Count > 0)
-            //        OpenForm.ShowForm(new FrmStudents(), this);
-            //    else
-            //        OpenForm.ShowForm(new FrmSaveStudent(), this);
-
-            //    FrmLossCollector.Instance._lblTitle.Text = "LOSS COLLECTOR --- Cadastro - Aluno";
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "System GYM Control", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-        }
-
-        private void btnSavePackage_Click(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    if (new Package().SearchAll().Rows.Count > 0)
-            //        OpenForm.ShowForm(new FrmPackages(), this);
-            //    else
-            //        OpenForm.ShowForm(new FrmSavePackage(), this);
-
-            //    FrmLossCollector.Instance._lblTitle.Text = "LOSS COLLECTOR --- Cadastro - Pacote";
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "System GYM Control", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-        }
-
-        private void btnSaveUser_Click(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    if (new User().SearchAll().Rows.Count > 0)
-            //        OpenForm.ShowForm(new FrmUsers(), this);
-            //    else
-            //        OpenForm.ShowForm(new FrmSaveUser(), this);
-
-            //    FrmLossCollector.Instance._lblTitle.Text = "LOSS COLLECTOR --- Cadastro - Usuário";
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "System GYM Control", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-        }
+      
         private void txtSearchProduct_TextChanged(object sender, EventArgs e)
         {
             LoadListLossProductCollections();
@@ -140,7 +90,7 @@ namespace LossControl
                     }
                     else if (dgvDatalostProductCollections.CurrentCell.ColumnIndex == 1)
                     {
-                        if (MessageBox.Show($"Deseja realmente excluir os dados de {dgvDatalostProductCollections.CurrentRow.Cells["product"].Value}?", "Coletor de Perdas de frutas e verduras", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                        if (MessageBox.Show($"Deseja realmente excluir os dados de {dgvDatalostProductCollections.CurrentRow.Cells["product"].Value}?", "COLETOR DE PERDAS DE FRUTAS E VERDURAS", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                         {
                             lossProductCollections.Delete(id);
                             dgvDatalostProductCollections.Rows.Remove(dgvDatalostProductCollections.CurrentRow);
@@ -155,13 +105,20 @@ namespace LossControl
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Coletor de Perdas de frutas e verduras", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "COLETOR DE PERDAS DE FRUTAS E VERDURAS", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnListtems_Click(object sender, EventArgs e)
         {
             LoadListLossProductCollections();
+
+            if (listLostProductCollection.Rows.Count == 0)
+            {
+                MessageBox.Show($"Não há items de perdas de produtos listado no dia {DateTime.Now.ToShortDateString()}!", "COLETOR DE PERDAS DE FRUTAS E VERDURAS", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             btnListtems.Visible = false;
         }
     }

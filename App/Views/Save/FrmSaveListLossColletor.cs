@@ -14,6 +14,12 @@ namespace LossControl
         {
             InitializeComponent();
             cbxProduct.Focus();
+            LoadItemsProductsInComboBox();
+            cbxProduct.SelectedIndex = -1;
+        }
+
+        private void LoadItemsProductsInComboBox()
+        {
             cbxProduct.DataSource = lossProductCollections.FindAllProduct();
             cbxProduct.DisplayMember = "product";
         }
@@ -22,7 +28,9 @@ namespace LossControl
 
         public FrmSaveListLossColletor(int id)
         {
-            InitializeComponent();            
+            InitializeComponent();
+            LoadItemsProductsInComboBox();
+            cbxProduct.SelectedIndex = -1;
             var listLostProductCollections = lossProductCollections.FindById(id);
             this.id = id;
             if (listLostProductCollections.Rows.Count > 0)
@@ -54,15 +62,55 @@ namespace LossControl
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            lossProductCollections.id = id;
-            lossProductCollections.product = cbxProduct.Text.Trim();
-            lossProductCollections.wheigth = decimal.Parse(txtWeigth.Text.Trim());
-            lossProductCollections.removal_date = DateTime.Now.ToShortDateString();
-            lossProductCollections.Save();
+            if (btnSave.Text == "Salvar")
+            {
+                if (!ValidateFields()) return;
 
-            listHasBeenSaved = true;
-            this.Close();
-        }     
+                lossProductCollections.id = id;
+                lossProductCollections.product = cbxProduct.Text.ToUpper().Trim();
+                lossProductCollections.wheigth = decimal.Parse(txtWeigth.Text.Trim());
+                lossProductCollections.removal_date = DateTime.Now.ToShortDateString();
+                lossProductCollections.Save();
+                LoadItemsProductsInComboBox();
+            }
+            else
+                LimparFields();
+
+            btnSave.Text = (btnSave.Text == "Salvar" && id == 0) ? "Novo" : "Salvar";
+            if (id > 0)
+                this.Close();
+            listHasBeenSaved = true;            
+        }
+
+        private void LimparFields()
+        {
+            cbxProduct.SelectedIndex = -1;
+            txtWeigth.Clear();
+        }
+
+        ErrorProvider errorProvider = new ErrorProvider();
+
+        private bool ValidateFields()
+        {
+            bool isFieldsValidated = false;
+
+            if (string.IsNullOrWhiteSpace(cbxProduct.Text))
+            {
+                errorProvider.SetError(cbxProduct, "Preencha o campo Produto!");
+                MessageBox.Show("Preencha o campo Produto!", "COLETOR DE PERDAS DE FRUTAS E VERDURAS", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cbxProduct.Focus();
+            }
+            else if (string.IsNullOrWhiteSpace(cbxProduct.Text))
+            {
+                errorProvider.SetError(txtWeigth, "Preencha o campo Peso!");
+                MessageBox.Show("Preencha o campo Peso!", "COLETOR DE PERDAS DE FRUTAS E VERDURAS", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtWeigth.Focus();
+            }
+            else
+                isFieldsValidated = true;
+
+            return isFieldsValidated;
+        }
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
 
@@ -78,15 +126,7 @@ namespace LossControl
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void FrmResponsiblesStudent_KeyDown(object sender, KeyEventArgs e)
+        private void FrmSaveListLossCollector_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 btnSave_Click(sender, e);
@@ -103,6 +143,16 @@ namespace LossControl
         private void txtweigth_Leave(object sender, EventArgs e)
         {
             txtWeigth.Text = FormatTextBox.FormatValueDecimal(txtWeigth.Text);
+        }
+
+        private void cbxProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider.Clear();
+        }
+
+        private void txtWeigth_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider.Clear();
         }
     }
 }
