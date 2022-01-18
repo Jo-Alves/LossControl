@@ -18,7 +18,7 @@ namespace LossControl
 
         private void LoadListLossProductCollections()
         {
-            dgvDatalostProductCollections.Rows.Clear();           
+            dgvDataLossProductCollections.Rows.Clear();           
 
             if (cbShowItem.Checked)
             {
@@ -34,17 +34,17 @@ namespace LossControl
 
             foreach (DataRow dr in listLostProductCollection.Rows)
             {
-                int coutRow = dgvDatalostProductCollections.Rows.Add();
-                dgvDatalostProductCollections.Rows[coutRow].Cells["edit"].Value = Properties.Resources.icons8_pencil_25px;
-                dgvDatalostProductCollections.Rows[coutRow].Cells["delete"].Value = Properties.Resources.icons8_trash_25px;
-                dgvDatalostProductCollections.Rows[coutRow].Cells["id"].Value = cbShowItem.Checked ? dr["id"].ToString() : "";
-                dgvDatalostProductCollections.Rows[coutRow].Cells["product"].Value = dr["product"].ToString();
-                dgvDatalostProductCollections.Rows[coutRow].Cells["wheigth"].Value = dr["wheigth"].ToString();
-                dgvDatalostProductCollections.Rows[coutRow].Cells["removalDate"].Value = dr["removal_date"].ToString();
+                int coutRow = dgvDataLossProductCollections.Rows.Add();
+                dgvDataLossProductCollections.Rows[coutRow].Cells["edit"].Value = Properties.Resources.icons8_pencil_25px;
+                dgvDataLossProductCollections.Rows[coutRow].Cells["delete"].Value = Properties.Resources.icons8_trash_25px;
+                dgvDataLossProductCollections.Rows[coutRow].Cells["id"].Value = cbShowItem.Checked ? dr["id"].ToString() : "";
+                dgvDataLossProductCollections.Rows[coutRow].Cells["product"].Value = dr["product"].ToString();
+                dgvDataLossProductCollections.Rows[coutRow].Cells["wheigth"].Value = dr["wheigth"].ToString();
+                dgvDataLossProductCollections.Rows[coutRow].Cells["removalDate"].Value = dr["removal_date"].ToString();
 
-                dgvDatalostProductCollections.Rows[coutRow].MinimumHeight = 45;
+                dgvDataLossProductCollections.Rows[coutRow].MinimumHeight = 45;
 
-                dgvDatalostProductCollections.ClearSelection();
+                dgvDataLossProductCollections.ClearSelection();
             }
         }
 
@@ -56,9 +56,11 @@ namespace LossControl
 
         private void cbShowItem_CheckedChanged(object sender, EventArgs e)
         {
+            if (btnListItems.Visible == true) return;
+
             LoadListLossProductCollections();
-            dgvDatalostProductCollections.Columns["edit"].Visible = cbShowItem.Checked ?  true: false;
-            dgvDatalostProductCollections.Columns["delete"].Visible = cbShowItem.Checked ? true : false;
+            dgvDataLossProductCollections.Columns["edit"].Visible = cbShowItem.Checked ?  true: false;
+            dgvDataLossProductCollections.Columns["delete"].Visible = cbShowItem.Checked ? true : false;
         }
 
         private void btnAddListLossProductCollector_Click(object sender, EventArgs e)
@@ -67,35 +69,39 @@ namespace LossControl
             saveListLossCollector.ShowDialog();
             if (saveListLossCollector.listHasBeenSaved)
             {
+                btnListItems.Visible = false;
                 LoadListLossProductCollections();
             }
         }
 
-        private void dgvDatalostProductCollections_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvDataLossProductCollections_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 if (e.RowIndex > -1)
                 {
-                    dgvDatalostProductCollections.ClearSelection();
+                    dgvDataLossProductCollections.ClearSelection();
 
-                    int id = int.Parse(dgvDatalostProductCollections.CurrentRow.Cells["id"].Value.ToString());
+                    int id = int.Parse(dgvDataLossProductCollections.CurrentRow.Cells["id"].Value.ToString());
 
-                    if (dgvDatalostProductCollections.CurrentCell.ColumnIndex == 0)
+                    if (dgvDataLossProductCollections.Columns["edit"].Visible == false && dgvDataLossProductCollections.Columns["delete"].Visible == false)
+                        return;
+
+                    if (dgvDataLossProductCollections.CurrentCell.ColumnIndex == 0)
                     {
                         var frmSaveListLossColletor = new FrmSaveListLossColletor(id);
                         frmSaveListLossColletor.ShowDialog();
                         if (frmSaveListLossColletor.listHasBeenSaved)
                             LoadListLossProductCollections();
                     }
-                    else if (dgvDatalostProductCollections.CurrentCell.ColumnIndex == 1)
+                    else if (dgvDataLossProductCollections.CurrentCell.ColumnIndex == 1)
                     {
-                        if (MessageBox.Show($"Deseja realmente excluir os dados de {dgvDatalostProductCollections.CurrentRow.Cells["product"].Value}?", "COLETOR DE PERDAS DE FRUTAS E VERDURAS", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                        if (MessageBox.Show($"Deseja realmente excluir os dados de {dgvDataLossProductCollections.CurrentRow.Cells["product"].Value}?", "COLETOR DE PERDAS DE FRUTAS E VERDURAS", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                         {
                             lossProductCollections.Delete(id);
-                            dgvDatalostProductCollections.Rows.Remove(dgvDatalostProductCollections.CurrentRow);
-                            dgvDatalostProductCollections.ClearSelection();
-                            //if (dgvDatalostProductCollections.Rows.Count == 0)
+                            dgvDataLossProductCollections.Rows.Remove(dgvDataLossProductCollections.CurrentRow);
+                            dgvDataLossProductCollections.ClearSelection();
+                            //if (dgvDataLossProductCollections.Rows.Count == 0)
                             //{
                             //    OpenForm.ShowForm(new FrmOptionsSave(), this);
                             //}
@@ -109,7 +115,7 @@ namespace LossControl
             }
         }
 
-        private void btnListtems_Click(object sender, EventArgs e)
+        private void btnListItems_Click(object sender, EventArgs e)
         {
             LoadListLossProductCollections();
 
@@ -119,7 +125,7 @@ namespace LossControl
                 return;
             }
 
-            btnListtems.Visible = false;
+            btnListItems.Visible = false;
         }
     }
 }

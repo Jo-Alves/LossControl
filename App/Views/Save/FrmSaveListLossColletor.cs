@@ -8,7 +8,7 @@ namespace LossControl
     public partial class FrmSaveListLossColletor : Form
     {
         int id;
-       public bool listHasBeenSaved = false;
+        public bool listHasBeenSaved = false;
 
         public FrmSaveListLossColletor()
         {
@@ -18,6 +18,27 @@ namespace LossControl
             cbxProduct.SelectedIndex = -1;
         }
 
+        public FrmSaveListLossColletor(int id)
+        {
+            InitializeComponent();
+
+            LoadItemsProductsInComboBox();
+
+            dtRemovalDate.Enabled = false;
+
+            cbxProduct.SelectedIndex = -1;
+
+            var listLossProductCollections = lossProductCollections.FindById(id);
+
+            this.id = id;
+
+            if (listLossProductCollections.Rows.Count > 0)
+            {
+                cbxProduct.Text = listLossProductCollections.Rows[0]["product"].ToString();
+                txtWeigth.Text = listLossProductCollections.Rows[0]["wheigth"].ToString();
+                dtRemovalDate.Text = listLossProductCollections.Rows[0]["removal_date"].ToString();
+            }
+        }
         private void LoadItemsProductsInComboBox()
         {
             cbxProduct.DataSource = lossProductCollections.FindAllProduct();
@@ -25,20 +46,6 @@ namespace LossControl
         }
 
         LossProductCollections lossProductCollections = new LossProductCollections();
-
-        public FrmSaveListLossColletor(int id)
-        {
-            InitializeComponent();
-            LoadItemsProductsInComboBox();
-            cbxProduct.SelectedIndex = -1;
-            var listLostProductCollections = lossProductCollections.FindById(id);
-            this.id = id;
-            if (listLostProductCollections.Rows.Count > 0)
-            {                
-                cbxProduct.Text = listLostProductCollections.Rows[0]["product"].ToString();
-                txtWeigth.Text = listLostProductCollections.Rows[0]["wheigth"].ToString();
-            }
-        }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -55,9 +62,10 @@ namespace LossControl
             this.btnClose.Image = Properties.Resources.icons8_close_window_32px_leave;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void btnNew_Click(object sender, EventArgs e)
         {
-            this.Close();
+            LimparFields();
+            btnNew.Visible = false;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -66,20 +74,31 @@ namespace LossControl
             {
                 if (!ValidateFields()) return;
 
-                lossProductCollections.id = id;
-                lossProductCollections.product = cbxProduct.Text.ToUpper().Trim();
-                lossProductCollections.wheigth = decimal.Parse(txtWeigth.Text.Trim());
-                lossProductCollections.removal_date = DateTime.Now.ToShortDateString();
-                lossProductCollections.Save();
-                LoadItemsProductsInComboBox();
+                try
+                {
+                    lossProductCollections.id = id;
+                    lossProductCollections.product = cbxProduct.Text.ToUpper().Trim();
+                    lossProductCollections.wheigth = decimal.Parse(txtWeigth.Text.Trim());
+                    lossProductCollections.removal_date = dtRemovalDate.Text;
+                    lossProductCollections.Save();
+                    LoadItemsProductsInComboBox();
+                    txtWeigth.Clear();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "COLETOR DE PERDAS DE FRUTAS E VERDURAS", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
                 LimparFields();
 
-            btnSave.Text = (btnSave.Text == "Salvar" && id == 0) ? "Novo" : "Salvar";
+            //btnSave.Text = (btnSave.Text == "Salvar" && id == 0) ? "Novo" : "Salvar";
             if (id > 0)
                 this.Close();
-            listHasBeenSaved = true;            
+            else
+                btnNew.Visible = true;
+
+            listHasBeenSaved = true;
         }
 
         private void LimparFields()
@@ -131,7 +150,7 @@ namespace LossControl
             if (e.KeyCode == Keys.Enter)
                 btnSave_Click(sender, e);
             else if (e.KeyCode == Keys.Escape)
-                btnCancel_Click(sender, e);
+                btnNew_Click(sender, e);
 
         }
 
